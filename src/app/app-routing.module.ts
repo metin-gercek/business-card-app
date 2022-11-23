@@ -1,3 +1,4 @@
+import { CardsComponent } from './components/cards/cards.component';
 import { AboutComponent } from './components/about/about.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'cards',
+    component: CardsComponent
   }
 ];
 
