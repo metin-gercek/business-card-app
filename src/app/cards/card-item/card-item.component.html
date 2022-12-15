@@ -1,13 +1,25 @@
 <mat-card class="card-item">
-  <mat-card-header>
-    <mat-card-title>{{cardItems.name}}</mat-card-title>
-    <mat-card-subtitle>{{cardItems.title}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{cardItems.phone}}</li>
-      <li class="list-group-item">{{cardItems.email}}</li>
-      <li class="list-group-item">{{cardItems.address}}</li>
-    </ul>
-  </mat-card-content>
+    <mat-card-header>
+        <mat-card-title>{{cardItems.name}}</mat-card-title>
+        <mat-card-subtitle>{{cardItems.title}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{cardItems.phone}}</li>
+            <li class="list-group-item">
+                <span *ngIf="cardItems.email">{{cardItems.email}}</span>
+                <small class="text-warning" *ngIf="!cardItems.email">E-mail not found</small>
+            </li>
+            <!--<ng-template #noEmail>
+                <small class="text-warning">E-mail not found</small>
+            </ng-template>-->
+            <li class="list-group-item">
+                <span *ngIf="cardItems.address">{{cardItems.address}}</span>
+                <small class="text-warning" *ngIf="!cardItems.address">Address not found</small>
+            </li>
+            <!--<ng-template #noAddress>
+                <small class="text-warning">Address not found</small>
+            </ng-template>-->
+        </ul>
+    </mat-card-content>
 </mat-card>
