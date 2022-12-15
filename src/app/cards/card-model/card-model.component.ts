@@ -1,3 +1,4 @@
+import { CardsService } from './../../services/cards.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -11,22 +12,27 @@ export class CardModelComponent implements OnInit {
   cardForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cardsService: CardsService
   ) { }
 
   ngOnInit(): void {
     this.cardForm = this.formBuilder.group({
-      name: ['',  Validators.max(50)],
-      title: ['',  [Validators.required, Validators.max(255)]],
-      phone: ['', [Validators.required, Validators.max(20)]],
-      email: ['',  [Validators.email, Validators.max(50)]],
-      address: ['',  Validators.max(255)],
+      name: ['',  Validators.maxLength(50)],
+      title: ['',  [Validators.required, Validators.maxLength(255)]],
+      phone: ['', [Validators.required, Validators.maxLength(20)]],
+      email: ['',  [Validators.email, Validators.maxLength(50)]],
+      address: ['',  Validators.maxLength(255)],
 
     })
   }
 
   addCard():void {
-    console.log(this.cardForm.value);
+    //console.log(this.cardForm.value);
+    this.cardsService.addCard(this.cardForm.value)
+    .subscribe((res:any) => {
+      console.log(res);
+    })
   }
 
 }
