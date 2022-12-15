@@ -8,6 +8,9 @@ import { CardItemComponent } from './card-item/card-item.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { CardModelComponent } from './card-model/card-model.component';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { CardModelComponent } from './card-model/card-model.component';
     CardsRoutingModule,
     MatCardModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CardsModule { }
