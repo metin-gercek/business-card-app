@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../services/snackbar.service';
 import { Cards } from './../../models/cards';
 import { CardsService } from './../../services/cards.service';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +20,7 @@ export class CardModelComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Cards,
     private formBuilder: FormBuilder,
-    private _snackBar: MatSnackBar,
+    private snackbarService: SnackbarService,
     private cardsService: CardsService,
     private dialogRef: MatDialogRef<CardModelComponent>
   ) {}
@@ -80,13 +81,14 @@ export class CardModelComponent implements OnInit {
   }
 
   getSuccessed(message: string): void {
-    this._snackBar.open(message, '', { duration: 4000 });
+    this.snackbarService.createSnackBar('success', message, 4000);
     this.cardsService.getCards();
     this.showLoadingBar = false;
     this.dialogRef.close();
   }
 
   getErrors(message: any) {
-    this._snackBar.open(message, '', { duration: 4000 });
+    this.snackbarService.createSnackBar('error', message, 4000);
+    this.showLoadingBar = false;
   }
 }
