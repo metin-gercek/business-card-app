@@ -1,23 +1,30 @@
+import { Cards } from './../models/cards';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cards } from '../models/cards';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardsService {
 
+  cards!: Cards[];
 
   constructor(
     @Inject('apiUrl') private apiUrl: string,
     private http: HttpClient
   ) { }
 
-  getCards(): Observable<Cards[]> {
-    return this.http.get<Cards[]>(this.apiUrl+'/cards');
+  getCards(): void {
+    this.http.get<Cards[]>(this.apiUrl+'/cards')
+    .subscribe((res: Cards[]) => {
+      this.cards = res;
+    })
   }
-  addCard(card: Cards) {
+  addCard(card: Cards) : Observable<any> {
     return this.http.post(this.apiUrl+'/cards', card);
+  }
+  updateCard(card: Cards, cardId: Number) : Observable<any> {
+    return this.http.put(this.apiUrl+'/cards/' + cardId, card);
   }
 }
