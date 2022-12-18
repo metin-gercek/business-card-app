@@ -53,4 +53,12 @@ export class CardModelComponent implements OnInit {
     })
   }
 
+  deleteCard() {
+    this.cardsService.deleteCard(this.data.id)
+    .subscribe((res:any)=> {
+      this._snackBar.open('Business Card deleted succesfully!', '', {duration: 4000});
+      this.cardsService.getCards();
+      this.dialogRef.close();
+    })
+  }
 }
