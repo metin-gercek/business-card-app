@@ -1,6 +1,8 @@
 import { CardsService } from './../../services/cards.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-card-model',
@@ -13,7 +15,9 @@ export class CardModelComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private cardsService: CardsService
+    private _snackBar: MatSnackBar,
+    private cardsService: CardsService,
+    private dialogRef: MatDialogRef<CardModelComponent>
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +36,10 @@ export class CardModelComponent implements OnInit {
     this.cardsService.addCard(this.cardForm.value)
     .subscribe((res:any) => {
       console.log(res);
+      this._snackBar.open('Business Card added succesfully!', '', {duration: 4000});
+      this.dialogRef.close(true);
     })
   }
+
 
 }
