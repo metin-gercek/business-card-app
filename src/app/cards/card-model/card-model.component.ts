@@ -14,6 +14,7 @@ import { Inject } from '@angular/core';
 export class CardModelComponent implements OnInit {
 
   cardForm!: FormGroup;
+  showLoadingBar: boolean = false;
 
   constructor(
    @Inject(MAT_DIALOG_DATA) public data: Cards,
@@ -36,28 +37,34 @@ export class CardModelComponent implements OnInit {
   }
 
   addCard():void {
+    this.showLoadingBar = true
     this.cardsService.addCard(this.cardForm.value)
     .subscribe((res:any) => {
       this._snackBar.open('Business Card added succesfully!', '', {duration: 4000});
       this.cardsService.getCards();
+      this.showLoadingBar = false;
       this.dialogRef.close();
     })
   }
 
   updateCard() : void {
+    this.showLoadingBar = true;
     this.cardsService.updateCard(this.cardForm.value, this.data.id)
     .subscribe ((res: any) => {
       this._snackBar.open('Business Card updated succesfully!', '', {duration: 4000});
       this.cardsService.getCards();
+      this.showLoadingBar = false;
       this.dialogRef.close();
     })
   }
 
-  deleteCard() {
+  deleteCard(): void {
+    this.showLoadingBar = true
     this.cardsService.deleteCard(this.data.id)
     .subscribe((res:any)=> {
       this._snackBar.open('Business Card deleted succesfully!', '', {duration: 4000});
       this.cardsService.getCards();
+      this.showLoadingBar = false;
       this.dialogRef.close();
     })
   }

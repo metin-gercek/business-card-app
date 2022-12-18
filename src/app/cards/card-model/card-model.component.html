@@ -1,5 +1,9 @@
 <h2 mat-dialog-title>{{data ? 'Update Business Card' : 'New Business Card'}}</h2>
 <mat-dialog-content class="mat-typography">
+  <div *ngIf="showLoadingBar">
+    <mat-progress-bar mode="query"></mat-progress-bar>
+    <br>
+  </div>
   <form [formGroup]="cardForm">
   <mat-form-field class="example-full-width">
     <mat-label>Title</mat-label>
@@ -30,7 +34,7 @@
   </div>
   <div>
     <button mat-button mat-dialog-close>Cancel</button>
-    <button color="primary" mat-flat-button (click)="data ? updateCard() : addCard()" >{{data ? 'Update' : 'Add'}}</button>
+    <button [disabled]="cardForm.invalid || showLoadingBar" color="primary" mat-flat-button (click)="data ? updateCard() : addCard()" >{{data ? 'Update' : 'Add'}}</button>
   </div>
 
 </mat-dialog-actions>
