@@ -4,7 +4,8 @@
       <h1 class="page-title">Business Cards Page</h1>
       <p class="page-description">Manage your Business Cards </p>
     </div>
-    <button mat-flat-button color="primary" (click)="openAddCardModal()">New business card</button>
+    <app-card-search></app-card-search>
+    <button mat-flat-button color="primary" (click)="openAddCardModal()" style="margin-left: 16px;">New business card</button>
   </div>
 
   <hr>
@@ -15,10 +16,11 @@
         <span>Business Cards are loading. Please wait </span>
       </div>
       <div class="col-12" *ngIf="cardsService.cards?.length === 0">
-        <span>You haven't added any business cards yet. <a class="text-primary" (click)="openAddCardModal()">Click here</a> to add your first business card.</span>
+        <span>You haven't added any business cards yet. <a class="text-primary" (click)="openAddCardModal()">Click
+            here</a> to add your first business card.</span>
       </div>
-      <div class="col-md-4 col-12 col-lg-3" *ngFor="let card of cardsService.cards">
-        <app-card-item [cardItems]="card" ></app-card-item>
+      <div class="col-md-4 col-12 col-lg-3" *ngFor="let card of cardsService.filteredCard">
+        <app-card-item [cardItems]="card"></app-card-item>
       </div>
 
 

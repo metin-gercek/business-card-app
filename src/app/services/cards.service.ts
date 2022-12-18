@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class CardsService {
 
   cards!: Cards[];
+  filteredCard!: Cards[];
 
   constructor(
     @Inject('apiUrl') private apiUrl: string,
@@ -18,7 +19,7 @@ export class CardsService {
   getCards(): void {
     this.http.get<Cards[]>(this.apiUrl+'/cards')
     .subscribe((res: Cards[]) => {
-      this.cards = res;
+      this.cards = this.filteredCard = res;
     })
   }
   addCard(card: Cards) : Observable<any> {
